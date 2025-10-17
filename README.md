@@ -143,31 +143,116 @@ max_consecutive_losses: 5        # Kill switch after N losses in a row
 
 ## Goals (Roadmap)
 
-### MK2 - Make it Actually Useful
-- [ ] SQLite persistence (save sessions, review history)
-- [ ] CSV export for Excel nerds
-- [ ] Configurable hotkeys (not everyone likes vim)
-- [ ] Trade notes/tags (track what strategy you were using)
-- [ ] Session templates (quick-start with saved configs)
+> **Note**: See `docs/TODO.md` for detailed implementation tasks and `docs/STRUCTURE.md` for architecture decisions.
 
-### MK3 - Advanced Risk Management
-- [ ] Profit lock mechanisms (auto-pull capital after X% gain)
-- [ ] Martingale/Anti-Martingale calculators (for the degenerates)
-- [ ] Kelly Criterion position sizing
-- [ ] Multi-asset session tracking (track BTC and EUR/USD separately)
-- [ ] Correlation warnings (don't bet on 5 correlated pairs)
+### Phase 1: Core Foundation (Current)
+**Status**: In Progress - Building the skeleton
 
-### MK4 - Integration Hell
-- [ ] Broker API integration (auto-log trades)
-- [ ] Real-time price feeds (for lazy people)
-- [ ] Webhook support (Discord/Telegram notifications)
-- [ ] Web dashboard (because TUIs scare normies)
+- [x] Repository structure (`core/`, `interface/`, `storage/`, `infra/`)
+- [x] Base config system (`config/std/base.yml`)
+- [x] Makefile for common tasks
+- [ ] Refactor monolithic `main.py` into proper modules
+  - [ ] `core/session.py` - Session management and state
+  - [ ] `core/trade.py` - Trade models and enums
+  - [ ] `core/statistics.py` - Stats calculations (expectancy, ROI, etc)
+  - [ ] `core/risk_engine.py` - Risk calculations and stop-loss logic
+  - [ ] `utils/config.py` - Config loading and validation
+  - [ ] `utils/logging.py` - Structured logging
+- [ ] `interface/tui/` separation
+  - [ ] `main.py` - TUI entry point
+  - [ ] `renderer.py` - All drawing/display logic
+  - [ ] `keybinds.py` - Input handling and command routing
+- [ ] Basic unit tests (`tests/unit/`)
+- [ ] Docker setup for reproducible environments
 
-### MK5 - The Dream
-- [ ] ML-based expectancy predictions (probably useless)
-- [ ] Backtesting engine (feed it historical data)
-- [ ] Multi-user mode (host for your buddies)
-- [ ] Audit logs (prove to your accountant you're bad at this)
+### Phase 2: Make It Actually Useful
+**Status**: Not Started
+
+- [ ] Session persistence (SQLite in `storage/sessions/`)
+- [ ] CSV/JSON export (`storage/exports/`)
+- [ ] Session history browser (TUI mode to review past sessions)
+- [ ] Trade notes/tags (track which strategy was used)
+- [ ] Multiple config profiles (`config/std/*.yml`)
+  - [ ] Conservative (2% risk, tight stops)
+  - [ ] Aggressive (10% risk, wide stops)
+  - [ ] Scalper (high frequency, small positions)
+- [ ] CLI tools (`tools/`)
+  - [ ] `analyze_session.py` - Post-session analysis
+  - [ ] `import_trades.py` - Import from CSV
+  - [ ] `export_report.py` - Generate PDF/HTML reports
+- [ ] Integration tests
+- [ ] Proper error handling and recovery
+
+### Phase 3: Advanced Risk Management
+**Status**: Not Started
+
+- [ ] Multiple position sizing algorithms
+  - [ ] Fixed fractional (current implementation)
+  - [ ] Kelly Criterion
+  - [ ] Volatility-adjusted (ATR-based)
+  - [ ] Martingale/Anti-Martingale (for the degenerates)
+- [ ] Profit lock mechanisms
+  - [ ] Auto-pull initial capital after X% gain
+  - [ ] Trailing stop-loss
+  - [ ] Partial profit taking rules
+- [ ] Multi-asset session tracking
+  - [ ] Track different pairs/assets separately
+  - [ ] Portfolio-level risk calculation
+  - [ ] Correlation warnings (don't bet on 5 correlated pairs)
+- [ ] Risk scenario simulator
+  - [ ] "What if I lose the next 5 trades?"
+  - [ ] Monte Carlo simulation for expectancy ranges
+- [ ] Configurable stop-loss strategies
+  - [ ] Time-based (stop after X hours)
+  - [ ] Profit target (stop at +Y%)
+  - [ ] Dynamic drawdown (adjust based on win streak)
+
+### Phase 4: Integration & Automation
+**Status**: Not Started
+
+- [ ] Broker API connectors (`connectors/apis/`)
+  - [ ] Auto-log trades from broker
+  - [ ] Real-time balance sync
+  - [ ] Position verification
+- [ ] Real-time data feeds (`connectors/web/`)
+  - [ ] Price data for decision support
+  - [ ] Economic calendar integration
+- [ ] Notification system
+  - [ ] Discord/Telegram webhooks
+  - [ ] Email alerts for stop-loss hits
+  - [ ] Desktop notifications (libnotify)
+- [ ] Web interface (`interface/web/`)
+  - [ ] REST API for remote access
+  - [ ] Basic dashboard (read-only TUI mirror)
+  - [ ] Mobile-friendly view
+- [ ] Infrastructure as Code
+  - [ ] Docker Compose for full stack
+  - [ ] Nginx reverse proxy
+  - [ ] Monitoring (Prometheus/Grafana)
+
+### Phase 5: The Dream (Probably Never)
+**Status**: Pipe Dream
+
+- [ ] Backtesting engine (`tools/backtest.py`)
+  - [ ] Feed historical trades
+  - [ ] Test risk strategies against past data
+  - [ ] Generate what-if reports
+- [ ] ML-based features (probably useless but fun)
+  - [ ] Pattern recognition in trade timing
+  - [ ] Expectancy prediction based on time-of-day
+  - [ ] Tilt detection (warning when behavior deviates)
+- [ ] Multi-user mode
+  - [ ] Host for your buddies
+  - [ ] Shared risk pools
+  - [ ] Leaderboards (for shame)
+- [ ] Compliance & Audit
+  - [ ] Detailed audit logs
+  - [ ] Tax report generation
+  - [ ] Regulatory compliance exports
+- [ ] Plugin system
+  - [ ] Custom risk algorithms
+  - [ ] Third-party integrations
+  - [ ] Strategy modules
 
 ---
 
@@ -187,7 +272,7 @@ This tool operates on a few principles:
 
 Binary options are essentially glorified coin flips with a house edge. Most brokers are unregulated offshore entities. You will probably lose money. RTFM won't make you profitable - it just makes your losses more *organized*.
 
-**This software is provided AS-IS with no guarantees.** Don't risk money you can't afford to lose. Don't blame me when you do anyway.
+**This software is provided AS-IS with no guarantees.** Don't risk money you can't afford to lose. Don't blame me when you do anyway. Go Learn proper trading and risk management and study price action. Rise above the casino mentality. Create your own edge.
 
 ---
 
@@ -230,4 +315,3 @@ Inspired by every blown trading account and every "just one more trade" moment.
 ---
 
 **Now go read the f*cking manual and stop losing money.**
-
