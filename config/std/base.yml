@@ -1,0 +1,8 @@
+# Base Configuration for TUI
+
+
+initial_balance: 2000.0
+risk_percent: 5.0
+payout_percent: 93.0
+stop_loss_percent: 20.0
+max_consecutive_losses: 5 # Will exit after this many consecutive losses
