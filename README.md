@@ -287,6 +287,7 @@ Binary options are essentially glorified coin flips with a house edge. Most brok
 ## Contributing
 
 This is a personal project built for my own trading workflow. PRs welcome but I'm picky. If you want a feature, fork it and build it yourself - that's the whole point.
+In All Honesty, I don't even know why anyone would want to contribute to this dumpster fire. I'm just writing this for good practice. 
 
 **Code style:**
 - Keep it simple, stupid
