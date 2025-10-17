@@ -230,3 +230,4 @@ Inspired by every blown trading account and every "just one more trade" moment.
 ---
 
 **Now go read the f*cking manual and stop losing money.**
+
